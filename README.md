@@ -1,6 +1,6 @@
 # Getting Started with React Weather Stats
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The purpose of this project is to allow users to enter a city and a country (preferrably a 2 character country code (i.e. GB = Great Britain)) and the map will re-render on the city they have chosen as well as showing a marker which when clicked will display the current weather data for that city.
 
 ## Available Scripts
 
