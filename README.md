@@ -2,7 +2,7 @@
 
 The purpose of this project is to allow users to enter a city and the map will re-render on the city they have chosen as well as showing a marker which when clicked will display the current weather data for that city.
 
-![Edinburgh Example](/public/edinburgh.gif)
+![Edinburgh Example](/public/england.gif)
 
 ## Available Scripts
 
