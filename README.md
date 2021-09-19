@@ -2,6 +2,8 @@
 
 The purpose of this project is to allow users to enter a city and a country (preferrably a 2 character country code (i.e. GB = Great Britain)) and the map will re-render on the city they have chosen as well as showing a marker which when clicked will display the current weather data for that city.
 
+![Edinburgh Example](/public/edinburgh.gif)
+
 ## Available Scripts
 
 In the project directory, you can run:
