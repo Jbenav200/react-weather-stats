@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.weather-icon {
+  width: 100px;
+  height: 100px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.input-lbl {
+  background: #198754 !important;
+  color: white !important;
+}
+
+.input-frm {
+  max-width: 50vw !important;
+  margin: 0 auto;
+}
+
+.mapboxgl-popup {
+  margin-left: 3%;
+}
+
+.mapboxgl-popup-close-button {
+  display: none;
+}
