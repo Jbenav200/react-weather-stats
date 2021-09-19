@@ -46,7 +46,7 @@ function Map() {
   const requestOptions = {
     method: 'GET',
     headers:{
-      'X-Api-Key': '8JLQFVSDfb8kGfwPTaL4ZA==RBbP0lSz3S8qB2cw',
+      'X-Api-Key': 'YOUR_API_KEY',
       'Content-Type': 'application/json',
     }
   }
