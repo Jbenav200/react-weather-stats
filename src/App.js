@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, InputGroup, FormControl} from 'react-bootstrap';
 import * as React from 'react';
 import { useState } from 'react';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, {Marker, Popup} from 'react-map-gl';
 
 function App() {
 
@@ -30,14 +30,17 @@ function Map() {
   const [state, setState] = useState({
     city:'',
     country: '',
+    temperature: 0,
+    windSpeed: null,
+    humidity: null,
   });
 
-  const updateCity = (e) => {
-    setState({city: e.target.value});
-  }
+  const [popupTrue, setPopupTrue] = useState(null);
+  const [markerTrue, setMarkerTrue] = useState(null);
 
-  const updateCountry = (e) => {
-    setState({country: e.target.value});
+  const updateCity = (e) => {
+    setPopupTrue(false);
+    setState({city: e.target.value});
   }
 
   const requestOptions = {
@@ -69,6 +72,7 @@ function Map() {
     .then(response => response.json())
     .then((response) => {
       console.log(`Temperature: ${response.temp} celcius.`);
+      setState({city: state.city, temperature: response.temp, humidity: response.humidity, windSpeed: response.wind_speed});
     })
     .catch((error) => console.log(`Error: ${error}`));
   }
@@ -76,8 +80,16 @@ function Map() {
   const getData = () => {
     getLongLat();
     getWeather();
-    
+    setMarkerTrue(true);
   }
+
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13){
+      getData();
+    }
+  }
+
+  console.log(process.env.REACT_APP_API_NINJA_TOKEN);
 
   return (
     <ReactMapGL
@@ -86,13 +98,39 @@ function Map() {
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       mapStyle="mapbox://styles/jbenav200/cktq5dwd72vjn17p6smoh4qr8"
     >
-      <InputGroup>
+      <InputGroup width="50vw">
         <InputGroup.Text>City:</InputGroup.Text>
-        <FormControl aria-label="Input City" placeholder="enter city" onChange={updateCity} />
-        <InputGroup.Text>Country Code:</InputGroup.Text>
-        <FormControl aria-label="Input City" placeholder="enter country" onChange={updateCountry} />
-        <Button variant="success" onClick={getData}>Search</Button>
+        <FormControl aria-label="Input City" value={state.city} placeholder="enter city" onChange={(e) => updateCity(e)} onKeyDown={handleKeyDown} />
+        <Button variant="success" onClick={getData} >Search</Button>
       </InputGroup>
+      {markerTrue ? (
+        <Marker
+        key={state.city}
+        longitude={viewport.longitude}
+        latitude={viewport.latitude}>
+          <Button
+            variant="link"
+            className="weather-btn"
+            onClick={(e) => {
+              setPopupTrue(true);
+            }}>
+            <img className="weather-icon" src="/weather.png" alt="weather icon" />
+          </Button>
+        </Marker>
+      ): null}
+      
+
+      {state.temperature && popupTrue ? (
+        <Popup latitude={viewport.latitude} longitude={viewport.longitude}>
+          <div>
+            <h4>{state.city}</h4>
+            <p>Temp: {state.temperature}° C</p>
+            <p>Wind Speed: {state.windSpeed} mph</p>
+            <p>Humidity: {state.humidity}%</p>
+          </div>
+        </Popup>
+      ) : null}
+
     </ReactMapGL>
   );
 }
