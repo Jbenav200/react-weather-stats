@@ -4,7 +4,7 @@ The purpose of this project is to allow users to enter a city and the map will r
 
 ![Edinburgh Example](/public/england.gif)
 
-#### To run this project you will need API Keys for [API Ninjas](https://api-ninjas.com/) and [mapbox GL JS](https://account.mapbox.com/)
+### To run this project you will need API Keys for [API Ninjas](https://api-ninjas.com/) and [mapbox GL JS](https://account.mapbox.com/)
 both are Open (Free) APIs
 
 ## Available Scripts
